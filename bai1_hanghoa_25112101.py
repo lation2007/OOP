@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 # -------------------------------------------------------------------
-# 1. CUSTOM EXCEPTION (Ngoại lệ tự định nghĩa)
+# 1. CUSTOM EXCEPTION 
 # Áp dụng để xử lý các lỗi nghiệp vụ (VD: Giá tiền bị âm)
 # -------------------------------------------------------------------
 class GiaKhongHopLe(Exception):
@@ -10,7 +10,7 @@ class GiaKhongHopLe(Exception):
         super().__init__(f"Loi: Gia '{gia}' khong hop le (phai >= 0).")
 
 # -------------------------------------------------------------------
-# 2. ABSTRACT BASE CLASS (Lớp trừu tượng)
+# 2. ABSTRACT BASE CLASS 
 # Đảm bảo không ai có thể tạo trực tiếp đối tượng từ lớp HangHoa
 # -------------------------------------------------------------------
 class HangHoa(ABC):
@@ -21,7 +21,7 @@ class HangHoa(ABC):
         # Gọi setter của thuộc tính 'gia' để chạy qua bước Validate dữ liệu
         self.gia = gia  
 
-    # --- @property: Đóng gói dữ liệu (Encapsulation) an toàn ---
+    # --- @property: Đóng gói dữ liệu an toàn ---
     @property
     def ma_hang(self): 
         return self.__ma_hang
@@ -45,7 +45,7 @@ class HangHoa(ABC):
             raise GiaKhongHopLe(value)
         self.__gia = value
 
-    # --- @abstractmethod: Ép buộc các lớp con phải ghi đè (Override) ---
+    # --- @abstractmethod: Ép buộc các lớp con phải ghi đè ---
     @abstractmethod
     def loai_hang(self):
         pass
@@ -54,7 +54,7 @@ class HangHoa(ABC):
         return (f"[{self.loai_hang()}] Ma: {self.__ma_hang} | "
                 f"{self.__ten_hang} | NSX: {self.__nha_sx} | Gia: {self.gia:,.0f} VND")
 
-    # --- MAGIC METHODS (Dunder methods) ---
+    # --- MAGIC METHODS ---
     def __str__(self):
         # Tự động gọi khi dùng hàm print() trên đối tượng
         return self.in_thong_tin()
